@@ -73,6 +73,10 @@ if __name__ == "__main__":
     Ref.myTello.streamon()
     Ref.myTello.takeoff()
     Ref.myTello.set_speed(30)
+    
+    # Tello Video Capture feature have to run in background
+    # Therefore I use "Thread()" and store tello object in another class variable
+    # Now I can access tello object anywhere with Ref class
     recorder = Thread(target=Video_Capture,args=[args.drone_name])
     recorder.start()
 
