@@ -1,0 +1,6 @@
+opencv-python
+djitellopy
+requests
+boto3
+pyqt5
+python-dotenv
