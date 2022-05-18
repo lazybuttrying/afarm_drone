@@ -17,6 +17,10 @@ pip install -r requirements.txt
 # Run
 python3 main.py
 ```
+## Architecture
+
+![Architecture](https://user-images.githubusercontent.com/79500842/169015425-b1350af8-9f8b-49a8-9069-85909a30088f.png)
+
 
 ## UI
 ### LoginWindow.py
