@@ -66,24 +66,26 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     path = create_path(args.width, args.height, args.interval)
-    draw_simulation(path)
+    # draw_simulation(path)
     Ref.myTello = tello.Tello()
     Ref.myTello.connect()
     print(Ref.myTello.get_battery())
     Ref.myTello.streamon()
     Ref.myTello.takeoff()
-    Ref.myTello.set_speed(30)
+    Ref.myTello.set_speed(15)
     
     # Tello Video Capture feature have to run in background
     # Therefore I use "Thread()" and store tello object in another class variable
     # Now I can access tello object anywhere with Ref class
     recorder = Thread(target=Video_Capture,args=[args.drone_name])
+    Ref.recorder = recorder
     recorder.start()
 
-    fly_drone(Ref.myTello,path,args.drone_id)
+    fly_drone(Ref.myTello, path, args.drone_id)
     
     keepRecording=False
-    Ref.myTello.send_rc_control(0,0,0,0)
+    # Ref.myTello.send_rc_control(0,0,0,0)
     Ref.myTello.streamoff()
     Ref.myTello.land()
     recorder.join()
+    del Ref.myTello

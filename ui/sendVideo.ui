@@ -125,7 +125,7 @@
     <item>
      <widget class="QPushButton" name="sendBtn">
       <property name="text">
-       <string>이미지 전송</string>
+       <string>영상 전송</string>
       </property>
      </widget>
     </item>

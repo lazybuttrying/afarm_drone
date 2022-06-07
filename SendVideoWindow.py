@@ -124,16 +124,20 @@ class SendVideoWindow(QMainWindow, send_page):
         print(quality_id) 
 
         client_s3 = boto3.client( 's3',
+        # aws_access_key_id = os.environ.get("S3_ACCESS_KEY"),
+        # aws_secret_access_key = os.environ.get("S3_SECRET_ACCESS_KEY"),
+
         aws_access_key_id = os.environ.get("S3_ACCESS_KEY"),
         aws_secret_access_key = os.environ.get("S3_SECRET_ACCESS_KEY"),
         )
 
         bucket_name = os.environ.get("BUCKET_NAME"),
-        file = './drone/' + self.selectedDrone + '/'+date
-        result = client_s3.upload_file(file, bucket_name, 'grape_before/'+str(quality_id)+".mp4")
+        file = str('./drone/' + self.selectedDrone + '/'+date)
+        print(file)
+        result = client_s3.upload_file(file, "afarm7defa4de003f406bbc7d6b4bdadbe11820155-dev", 'grape_before/'+str(quality_id)+".mp4")
         print(result)
 
-        payload = "{\n\n   \"input\": \"{\\\"quality_id\\\":%s}\",\n   \"stateMachineArn\": \"arn:aws:states:ap-northeast-2:248918757327:stateMachine:AfarmProdSeoul\"\n}\n"
+        payload = "{\n\n   \"input\": \"{\\\"quality_id\\\":%s, \\\"skip_frame\\\":1}\",\n   \"stateMachineArn\": \"arn:aws:states:ap-northeast-2:248918757327:stateMachine:AfarmProdSeoul\"\n}\n"
         response = requests.request("POST",
 #             "https://3w09h26tyd.execute-api.ap-northeast-1.amazonaws.com/callStepfunction",
              "https://neizhl61lb.execute-api.ap-northeast-2.amazonaws.com/alpha",
